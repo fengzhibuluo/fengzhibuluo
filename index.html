@@ -248,7 +248,6 @@
 		<<audio id="bgMusic" loop preload="auto" src="./a.mp3"  autoplay loop>
 
 		</audio>
-		<button id="playBtn" style="position:fixed;top:1px;right:20px;z-index:999;">🎵 开启音乐</button>
 
 
 		
@@ -276,39 +275,25 @@
 			window.location.href='./Webpage/blog.html';
 		});
 	</script>
-	//背景音乐
 	<script>
 		const audio = document.getElementById('bgMusic');
-		const playBtn = document.getElementById('playBtn');
-		let isPlayed = false;
-
-		// 点击按钮播放/暂停
-		playBtn.addEventListener('click', async () => {
-		try {
-			if (!isPlayed) {
-			await audio.play();
-			isPlayed = true;
-			playBtn.textContent = '🔇 关闭音乐';
-			} else {
-			audio.pause();
-			isPlayed = false;
-			playBtn.textContent = '🎵 开启音乐';
-			}
-		} catch (err) {
-			console.error('播放失败:', err);
-			alert('请点击播放按钮开启音乐');
-		}
-		});
-
-		// 兼容 iOS/微信：页面首次触摸即预加载（不发声）
-		document.addEventListener('touchstart', async () => {
-		if (!isPlayed) {
-			audio.muted = true;
-			await audio.play();
-			audio.pause();
-			audio.currentTime = 0;
-			audio.muted = false;
-		}
+		let canPlay = false;
+		
+		// 用户第一次触摸屏幕 → 播放音乐
+		document.addEventListener('touchstart', function() {
+		  if (!canPlay) {
+		    audio.play().catch(err => {});
+		    canPlay = true;
+		  }
 		}, { once: true });
-	</script>
+		
+		// 电脑端也兼容
+		document.addEventListener('click', function() {
+		  if (!canPlay) {
+		    audio.play().catch(err => {});
+		    canPlay = true;
+		  }
+		}, { once: true });
+</script>
+
 </html>
