@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>风部博客</title>
+		<link rel="stylesheet" href="./css/style.css">
+		<style type="text/css">
+			/*清a标签默认样式*/
+			a{
+				text-decoration: none;
+			}
+			/* 清ul,li等的点 */
+			ul,li{
+				list-style: none;
+			}
+			/* div class='wrap' */
+			.wrap{
+				position: fixed;
+				background-image: radial-gradient(#666, #333);
+				/* div加了1px边框 清边框 */
+				border: none;
+				width: 100%;
+				height: auto;
+			}
+			/* header and logo */
+			header {
+				position:relative; /* positioning context for title and search areas */
+				height:70px;   /*  fixed height to enclose absolutely positioned elements */	
+				margin:10px 0;  /* vertical space around header */
+				border-radius:20px 0px 20px 0px; /* order: tl, tr, br, bl */
+				box-shadow:0 12px 8px -9px #555; /* negative spread brings shadow inside box width */
+				background:#fff;
+				padding-top:1px; /* prevents menu's top margin collapsing */
+				}
+			header section#title {
+				position:absolute;
+				width:300px; /* wide enough to not force text wrap */
+				height:65px; /* tall enough for both lines of text */
+				left:0px; /* top left corner positioning */
+				top:0px;
+				}
+			header h1 {
+				padding:9px 12px 0;
+				font-family:Lato, helvetica, sans-serif;
+				font-style:normal;
+				font-weight:900;
+				font-size:2.2em;
+				line-height:1;
+				letter-spacing:-.025em;
+				color:#4eb8ea;
+				}
+			header h2 {
+				font-family:"Source Sans Pro", helvetica, sans-serif;
+				font-style:normal;
+				font-weight:400;
+				font-size:.9em;
+				color:#333;
+				padding:0px 12px;
+				line-height:1;
+				letter-spacing:-.025em;
+				}
+			/* 导航栏 */
+			@charset "UTF-8";
+			/* CSS Document */
+			* {margin:0; padding:0;}
+			div {height:150px;border:1px solid red; background:#eee;}
+			nav.menu  {
+				margin:19px auto; 
+				padding:0;
+				font-size:.8em;
+				text-align:center; 
+				}
+			nav.menu > ul {
+				display:inline-block;
+				}
+			nav.menu li {  
+				float:left; /* makes menu horizontal */
+				list-style-type:none; /* removes default bullets off lists */
+				position:relative; /* position context for child list */
+				}
+			nav.menu ul li a {
+				display:block; /* makes link fill li */
+				padding:.25em .8em;
+				background-clip:padding-box; /* background only under padding, not border */  
+				text-align:left;
+				text-decoration:none; /* removes link underlining */
+				font-family:"Source Sans Pro", helvetica, sans-serif;
+				font-style: normal;
+				font-weight:600;
+				font-size:1.2em;
+				color:#fff;
+				-webkit-font-smoothing: antialiased; /* prevents pop of anti-alias change at end of opacity transition */
+				}
+			nav.menu li.choice1 a {
+				background:#f58c21;
+				}
+			nav.menu li.choice2 a {
+				background:#4eb8ea;
+				}
+			nav.menu li.choice3 a {
+				background:#d6e636;
+				}
+			nav.menu li.choice4 a {
+				background:#ee4c98;
+				}
+			nav.menu li.choice5 a {
+				background:#f58c21;
+				}
+			nav.menu li:hover > a {
+				color:#555;
+				border-color:#fff;
+				border:0;
+				}
+			nav.menu li:last-child a  {
+				border-bottom-right-radius:10px;
+				}
+			nav.menu li:first-child a  {border-top-left-radius:10px;}
+
+			/* level 2 menus */
+			nav.menu li ul { 
+				opacity:0; 	
+				visibility:hidden; position:absolute; /* position relative to parent menu */
+				width:12em;
+				left:0px;   /* aligns left of sub-menu to parent */
+				top:100%; 	/* aligns bottom of sub-menu to parent */
+				}
+			.touch nav.menu li ul { /* uses modernizer to only transition opacity of touch devices */	
+				-webkit-transition: 1s opacity; 
+				-moz-transition: 1s opacity;
+						transition: 1s opacity; 
+				}
+			nav.menu li ul { 
+				-webkit-transition: 1s all .2s; 
+				-moz-transition: 1s all .2s;
+						transition: 1s all .2s; 
+				}
+			nav.menu li:hover > ul {
+				opacity:1; /* both properties are transitioned */
+				visibility:visible;
+				}
+			nav.menu li li {
+				float:none; /* kills inherited float - makes list stack */
+				}
+			nav.menu li li:first-child a {
+				border-radius:0;
+				}
+			nav.menu li li:last-child a {
+				border-bottom-left-radius:10px;
+				}
+			.no-csstransitions nav.menu li ul { /* for no-transitions browsers */
+				visibility:visible; /* overrides transitions version */
+				opacity:1;  /* overrides transitions version */
+				display:none; /* hides menu if no css transition capability */
+				}
+			.no-csstransitions nav.menu li:hover > ul {
+				display:block; /* displays menu when parent hovered */
+				}
+			@media only screen and (max-width:480px) { /* portrait iPhone */
+				nav.menu ul li a {font-size:.9em;} /* scales menu to fit */
+				}
+			@media only screen and (max-width:320px) { /* portrait iPhone */
+				nav.menu ul li a {font-size:.8em;} /* scales menu to fit */
+				}
+			/* 搜索框 */
+			form.search {
+				position:absolute;
+				width:150px;
+				right:20px; /* relative to right side of header */
+				top:23px;
+				/* border:1px solid #333; */ /* temp for screenshots */
+				}
+			.search input {
+				float:right; width:70px;	
+				padding:2px 0 3px 5px;
+				border-radius:10px 0px 10px 0px;
+				font-family:"Source Sans Pro", helvetica, sans-serif;
+				font-style: normal; font-weight: 400; font-size:1em;
+				color:#888;
+				outline:none; /* removes default border hilite */
+				-webkit-transition:2s width; /* animates field */
+				}
+			.search input:focus {
+				width:140px;
+				}
+			.search label{
+				display:none; 
+				}
+			form.search input {
+				background-color:#FFF;
+				}
+			form.search input::-webkit-input-placeholder {color:#ccc;
+				}
+			/* footer */
+			#footer{
+				position: absolute;
+				bottom: 0;
+				font-size: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<section id="title">
+					<h1>风部</h1>
+					<h2>凤至不落，梧桐不息</h2>
+				</section>
+			
+				<nav class="menu">
+					<ul>
+						<li class="choice1" ><a href="#">首页</a></li>
+						<li id="choice2" class="choice2" ><a href="./Webpage/index.html">博文</a>
+							<ul><!-- drop down menu items -->
+								<li><a href="./Webpage/HTMLbook.html">HTML标签</a></li>
+								<li><a href="#">Scriptin&#8217; with Ajax</a></li>
+								<li><a href="#">Codin&#8217; for the Web</a></li>
+								<li><a href="#">Visual Stylin' with CSS3</a></li>
+							</ul>
+						</li>
+						<li class="choice3" ><a href="#" >硬件</a>
+							<ul><!-- drop down menu items -->
+								<li><a href="#">Resource 1</a></li>
+								<li><a href="#">Resource 2</a></li>
+								<li><a href="#">Resource 3</a></li>
+							</ul>
+						</li>
+						<li class="choice4"><a href="#">数据结构，算法，动效</a></li>
+						<li class="choice5"><a href="#">3D模型</a></li>
+					</ul>
+				</nav> 
+			</header>
+			<!-- 搜索框 -->
+			<form class="search" action="#" method="POST">
+				<label for="user_name">search</label>
+				<input type="text" id="user_name" name="user_name" placeholder="search">
+			</form>
+		</div>
+		
+		
+		
+		<div id="three-container"></div>
+
+		<div id="instructions">
+			click and drag to control the animation
+		</div>
+		
+		<!-- 背景音乐 -->
+		<audio id="bgMusic" loop  src="./Music/a.mp3"  autoplay loop>
+
+		</audio>
+
+
+		
+		<footer id="footer">
+			<h2>网站使用的字体，图片，音乐，等素材如侵犯原著作者的权益</h2>
+			<h2>联系：912457700@qq.com删除</h2>
+		</footer>
+	</body>
+	<!--轮播图库加载-->
+	<script src='./js/three.min.js'></script>
+	<script src='./js/TweenMax.min.js'></script>
+	<script src='./js/bas.js'></script>
+	<script src='./js/OrbitControls-2.js'></script>
+	<script  src="./js/script.js"></script>
+	<script type="text/javascript">
+//		点击翻开书,或者说弹出模态框
+//		var book=document.getElementsByClassName(book);
+//		book.addEventListener('click',function(){
+//			
+//		});
+	</script>
+	<script type="text/jacascript">
+		var choice2=document.getElementById('choice2');
+		choice2.addEventListener('click',function(){
+			window.location.href='./Webpage/blog.html';
+		});
+	</script>
+	<script>
+		const audio = document.getElementById('bgMusic');
+		let canPlay = false;
+		
+		// 用户第一次触摸屏幕 → 播放音乐
+		document.addEventListener('touchstart', function() {
+		  if (!canPlay) {
+		    audio.play().catch(err => {});
+		    canPlay = true;
+		  }
+		}, { once: true });
+		
+		// 电脑端也兼容
+		document.addEventListener('click', function() {
+		  if (!canPlay) {
+		    audio.play().catch(err => {});
+		    canPlay = true;
+		  }
+		}, { once: true });
+</script>
+
+</html>
